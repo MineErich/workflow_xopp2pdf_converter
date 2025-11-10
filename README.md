@@ -15,7 +15,7 @@ Install Xournal++ in the back end of your server.
     apt install -y xournalpp
 
 Next, install this app in your Nextcloud Apps Page
-Finally, set up the workflow. Create a filter "File name" "matches" and put the following into the text field:
+Finally, set up the workflow. Create a filter "File name" -> "matches" and put the following into the text field:
 
     /^.+\.(xoj|xopp)$/i
 
