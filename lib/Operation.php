@@ -45,11 +45,11 @@ class Operation implements ISpecificOperation {
 	}
 
 	public function getDisplayName(): string {
-		return $this->l->t('PDF conversion');
+		return $this->l->t('XOPP 2 PDF conversion');
 	}
 
 	public function getDescription(): string {
-		return $this->l->t('Convert documents into the PDF format on upload and write.');
+		return $this->l->t('Convert Xournal / Xournal++ files into the PDF format on upload and write.');
 	}
 
 	public function getIcon(): string {
