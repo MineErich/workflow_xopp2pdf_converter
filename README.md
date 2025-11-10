@@ -7,7 +7,7 @@
 
 This app can automatically convert .xopp and .xoj files into PDFs. This allows you to create Xournal(++) files on your PC, and if they are synced to Nextcloud, you will always be able to open the PDF version — for example, when you're out and about.
 
-## Installtion
+## Installation
 
 Install Xournal++ in the back end of your server.
 
