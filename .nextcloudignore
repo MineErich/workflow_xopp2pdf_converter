@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+babel.config.js
+.babelrc.js
+composer.json
+composer.lock
+.drone.yml
+.eslintrc.js
+.git
+.github
+.gitignore
+krankerl.toml
+.l10nignore
+.nextcloudignore
+node_modules
+package.json
+package-lock.json
+.php-cs-fixer.cache
+.php-cs-fixer.dist.php
+README.md
+screenshots
+src
+.stylelintrc.js
+stylelint.config.js
+tests
+.tx
+webpack.js
+psalm.xml

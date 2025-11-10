@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+  - SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>workflow_xopp2pdf_converter</id>
+	<name>XOPP 2 PDF conversion</name>
+	<summary>todo</summary>
+	<description>todo</description>
+	<version>3.0.0</version>
+	<licence>agpl</licence>
+	<author mail="coding@schilljs.com">Joas Schilling</author>
+	<author mail="blizzz@arthur-schiwon.de">Arthur Schiwon</author>
+	<namespace>WorkflowXoppToPdfConverter</namespace>
+	<types>
+		<filesystem/>
+	</types>
+	<category>files</category>
+	<category>tools</category>
+	<category>organization</category>
+	<category>workflow</category>
+	<website>https://github.com/nextcloud/workflow_xopp2pdf_converter</website>
+	<bugs>https://github.com/nextcloud/workflow_xopp2pdf_converter/issues</bugs>
+	<repository type="git">https://github.com/nextcloud/workflow_xopp2pdf_converter.git</repository>
+	<screenshot>https://raw.githubusercontent.com/nextcloud/workflow_xopp2pdf_converter/master/screenshots/flow-settings-ui.png</screenshot>
+	<screenshot small-thumbnail="https://raw.githubusercontent.com/nextcloud/workflow_xopp2pdf_converter/master/screenshots/management-apps_small.png">https://raw.githubusercontent.com/nextcloud/workflow_xopp2pdf_converter/master/screenshots/management-apps.png</screenshot>
+	<dependencies>
+		<nextcloud min-version="32" max-version="32" />
+	</dependencies>
+</info>
