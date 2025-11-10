@@ -51,6 +51,7 @@ class Convert extends QueuedJob {
 		$command = $this->getCommand();
 		if ($command === null) {
 			$this->logger->error('Can not find xournalpp path. Please make sure to configure "preview_xournalpp_path" in your config file.');
+			// return; // GPT generated, original does no do this
 		}
 
 		$path = (string)$argument['path'];
@@ -72,44 +73,53 @@ class Convert extends QueuedJob {
 		$tmpPath = $view->toTmpFile($file);
 		$tmpDir = $this->tempManager->getTempBaseDir();
 
-		$defaultParameters = ' -env:UserInstallation=file://' . escapeshellarg($tmpDir . '/nextcloud-' . $this->config->getSystemValue('instanceid') . '/') . ' --headless --nologo --nofirststartwizard --invisible --norestore --convert-to pdf --outdir ';
-		$clParameters = $this->config->getSystemValue('preview_office_cl_parameters', $defaultParameters);
+		// get filename without ending
+		$baseName = pathinfo($file, PATHINFO_FILENAME);
+		$newFileName = $baseName . '.pdf';
+		$newTmpPath = $tmpDir . '/' . $newFileName;
 
-		$exec = $command . $clParameters . escapeshellarg($tmpDir) . ' ' . escapeshellarg($tmpPath);
+		// Kommando für Xournal++ bauen
+		// Beispiel: xournalpp --create-pdf=/tmp/foo.pdf /tmp/foo.xopp
+		$exec = escapeshellcmd($command)
+			. ' --create-pdf=' . escapeshellarg($newTmpPath)
+			. ' ' . escapeshellarg($tmpPath);
 
 		$exitCode = 0;
 		exec($exec, $out, $exitCode);
 		if ($exitCode !== 0) {
-			$this->logger->error('could not convert {file}, reason: {out}',
-				[
-					'app' => 'workflow_xopp2pdf_converter',
-					'file' => $node->getPath(),
-					'out' => $out
-				]
-			);
+			$this->logger->error('could not convert {file}, reason: {out}', 
+			[
+				'app' => 'workflow_xopp2pdf_converter',
+				'file' => $node->getPath(),
+				'out' => $out
+			]
+		);
 			return;
 		}
 
-		$newTmpPath = pathinfo($tmpPath, PATHINFO_FILENAME) . '.pdf';
-		$newFileBaseName = pathinfo($file, PATHINFO_FILENAME);
-		$newFileName = $newFileBaseName . '.pdf';
-
+		// handle conflicts, if file already exists
 		$folder = $node->getParent();
-
 		$index = 0;
 		while ($targetPdfMode === 'preserve' && $folder->nodeExists($newFileName)) {
 			$index++;
-			$newFileName = $newFileBaseName . ' (' . $index . ').pdf';
+			$newFileName = $baseName . ' (' . $index . ').pdf';
 		}
 
-		$view->fromTmpFile($tmpDir . '/' . $newTmpPath, $newFileName);
+		// write converted file back to nextcloud
+		$view->fromTmpFile($newTmpPath, $newFileName);
 
+		// delete original, if wished
 		if ($originalFileMode === 'delete') {
-			// FIXME: sometimes causes "unable to rename, destination directory is not writable" because the trashbin url
-			// looses the user part in \OC\Files\Storage\Local::moveFromStorage() line 460
-			// return $rootStorage->rename($sourceStorage->getSourcePath($sourceInternalPath), $this->getSourcePath($targetInternalPath));
-			//                                                                                 ^
-			$node->delete();
+			// TODO: not tested
+			try {
+				$node->delete();
+			} catch (\Exception $e) {
+				$this->logger->warning('could not delete original file {file}: {msg}', [
+					'app' => 'workflow_xopp2pdf_converter',
+					'file' => $node->getPath(),
+					'msg' => $e->getMessage(),
+				]);
+			}
 		}
 	}
 
