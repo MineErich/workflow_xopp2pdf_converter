@@ -26,6 +26,6 @@
 	<screenshot>https://raw.githubusercontent.com/MineErich/workflow_xopp2pdf_converter/refs/heads/main/screenshots/flow-settings-ui.png</screenshot>
 	<screenshot small-thumbnail="https://raw.githubusercontent.com/MineErich/workflow_xopp2pdf_converter/refs/heads/main/screenshots/management-apps_small.png">https://raw.githubusercontent.com/MineErich/workflow_xopp2pdf_converter/refs/heads/main/screenshots/management-apps.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="32" max-version="33" />
+		<nextcloud min-version="32" max-version="32" />
 	</dependencies>
 </info>
