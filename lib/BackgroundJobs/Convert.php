@@ -124,19 +124,14 @@ class Convert extends QueuedJob {
 	}
 
 	protected function getCommand(): ?string {
-		$libreOfficePath = $this->config->getSystemValue('preview_xournalpp_path', null);
-		if (is_string($libreOfficePath)) {
-			return escapeshellcmd($libreOfficePath);
+		$xournalppPath = $this->config->getSystemValue('preview_xournalpp_path', null);
+		if (is_string($xournalppPath)) {
+			return escapeshellcmd($xournalppPath);
 		}
 
 		$whichLibreOffice = shell_exec('command -v xournalpp');
 		if (!empty($whichLibreOffice)) {
 			return 'xournalpp';
-		}
-
-		$whichOpenOffice = shell_exec('command -v openoffice');
-		if (!empty($whichOpenOffice)) {
-			return 'openoffice';
 		}
 
 		return null;
