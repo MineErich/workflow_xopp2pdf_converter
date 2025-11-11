@@ -1,9 +1,6 @@
 <?php
 
-/**
- * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
- * SPDX-License-Identifier: AGPL-3.0-or-later
- */
+
 
 namespace OCA\WorkflowXoppToPdfConverter\BackgroundJobs;
 
@@ -51,7 +48,6 @@ class Convert extends QueuedJob {
 		$command = $this->getCommand();
 		if ($command === null) {
 			$this->logger->error('Can not find xournalpp path. Please make sure to configure "preview_xournalpp_path" in your config file.');
-			// return; // GPT generated, original does no do this
 		}
 
 		$path = (string)$argument['path'];
@@ -78,8 +74,6 @@ class Convert extends QueuedJob {
 		$newFileName = $baseName . '.pdf';
 		$newTmpPath = $tmpDir . '/' . $newFileName;
 
-		// Kommando für Xournal++ bauen
-		// Beispiel: xournalpp --create-pdf=/tmp/foo.pdf /tmp/foo.xopp
 		$exec = escapeshellcmd($command)
 			. ' --create-pdf=' . escapeshellarg($newTmpPath)
 			. ' ' . escapeshellarg($tmpPath);
@@ -110,7 +104,6 @@ class Convert extends QueuedJob {
 
 		// delete original, if wished
 		if ($originalFileMode === 'delete') {
-			// TODO: not tested
 			try {
 				$node->delete();
 			} catch (\Exception $e) {
