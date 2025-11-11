@@ -17,9 +17,9 @@
 	<category>tools</category>
 	<category>organization</category>
 	<category>workflow</category>
-	<website>https://github.com/MineErich/workflow-xopp-2-pdf</website>
-	<bugs>https://github.com/MineErich/workflow-xopp-2-pdf/issues</bugs>
-	<repository type="git">https://github.com/MineErich/workflow-xopp-2-pdf.git</repository>
+	<website>https://github.com/MineErich/workflow_xopp2pdf_converter</website>
+	<bugs>https://github.com/MineErich/workflow_xopp2pdf_converter/issues</bugs>
+	<repository type="git">https://github.com/MineErich/workflow_xopp2pdf_converter.git</repository>
 	<screenshot>https://raw.githubusercontent.com/MineErich/workflow_xopp2pdf_converter/refs/heads/main/screenshots/flow-settings-ui.png</screenshot>
 	<screenshot small-thumbnail="https://raw.githubusercontent.com/MineErich/workflow_xopp2pdf_converter/refs/heads/main/screenshots/management-apps_small.png">https://raw.githubusercontent.com/MineErich/workflow_xopp2pdf_converter/refs/heads/main/screenshots/management-apps.png</screenshot>
 	<dependencies>
